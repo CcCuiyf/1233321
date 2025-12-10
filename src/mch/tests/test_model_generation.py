@@ -1,4 +1,5 @@
 """Tests for the model generation functionality."""
+import sys,os
 
 import pytest
 import pandas as pd
@@ -12,6 +13,8 @@ import joblib
 from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
+
+sys.path.append("/Workspace/9900-f18a-cake/working_branch/src")
 
 from mch.models.model_generation import make_dataset, run_grid_search, run_level
 

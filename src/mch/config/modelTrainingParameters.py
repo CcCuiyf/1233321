@@ -20,7 +20,14 @@ refinement_config = load_refinement_config()
 
 # Expose variables for easy access
 resultsDirectory = refinement_config.get('resultsDirectory')
-parameter_grid = refinement_config.get('parameter_grid')
+# parameter_grid = refinement_config.get('parameter_grid')
+
+# ———————— changed ————————————
+model_configs = refinement_config.get("model_configs", {})
+rf_config = model_configs.get("random_forest", {})
+parameters = rf_config.get("parameters", {})
+parameter_grid = rf_config.get("parameter_grid", {})
+# ———————— changed ————————————
 
 
 #filteredMValueFile: /media/storage/bcurran/classifiers/methylation/data/methylationMValuesFiltered.parquet

@@ -44,7 +44,7 @@ logger.setLevel(logging.INFO)
 # Create a unique log file for each run
 timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 log_dir = Path('/app/data/logs/model_generation')
-log_dir.mkdir(parents=True, exist_ok=True) 
+log_dir.mkdir(parents=True, exist_ok=True)  
 log_file = log_dir / f'model_generation_{timestamp}.log'
 
 # Create file handler and set format

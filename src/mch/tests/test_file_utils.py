@@ -1,5 +1,6 @@
-import os
+import os,sys
 import pytest
+sys.path.append("/Workspace/9900-f18a-cake/working_branch/src")
 from mch.utils.file_utils import extract_patient_id, find_methylation_file_name
 
 def test_extract_patient_id():

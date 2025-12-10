@@ -18,9 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 # 2) 先拷 requirements 和本地包，利用构建缓存
-COPY pyproject.toml .
-COPY README.md .
-COPY src ./src
+# COPY pyproject.toml .
+# COPY README.md .
+# COPY src ./src
 
 COPY requirements.txt .
 
@@ -33,4 +33,4 @@ RUN pip install --upgrade pip setuptools wheel \
  && pip install -r requirements.txt
 
 # 5) 再拷其余源码
-COPY . .
+# COPY . .

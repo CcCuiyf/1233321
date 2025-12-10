@@ -1,10 +1,74 @@
 # README
-This README would normally document whatever steps are necessary to get your application up and running.
 
 ## What is this repository for?
-This repository contains source code for heirarichal classifer using methylation data. Code is being migrated from a general classifiers/ Version 0.1
+This repository contains source code for heirarichal classifer using methylation data. Code is being migrated from a general classifiers
 
 ## Set up
+
+### Instruction
+The whole project was combined by 4 parts, which are Training, DifferentialMethylationClassifer, Grid Search and Parallel Training.
+
+#### Working branch
+on databricks, the working branch was like Workspace/{username}/{branchname}/src/mch
+
+#### Training
+using Random Forest as base model, relavent functions/file as below:
+
+#### Training entrance
+/mch/model/training.py
+
+class BatchModelTrainer: the entrance of model training, using
+
+trainer = BatchModelTrainer() stats = trainer.train_all_models(raise_on_error=raise_on_error)
+
+to train the model.
+
+#### Data load
+/mch/config/setting.py
+
+in function load_data, by change content of mvalue_df = pl.read_csv() to select different dataset
+
+/mch/config/base_config.yaml
+
+please modify the directory defined inside if want run the project on another branch
+
+#### DifferentialMethylationClassifer
+was defined in /model/DifferentialMethylation.R using limma and implement by /model/DifferentialMethylationClassifer.py
+
+only thing to notice is check the cells above to confirm the R enviroment and package used was successfully installed
+
+Changing the parameter disable_dm = True will disable DifferentialMethylationClassifer.
+
+##### in case DifferentialMethylationClassifer was disable:
+Will use top-k to filter feature, the algorithm was defined in /model/training.py, fuction train_all_model have a branch if disable_dm
+
+in this case, if need to change the parameter of top-k, please go the parameter setting cell and change prefilter_* staff.
+
+#### Grid Search
+using GridSearchCV defined by sklearn, at /model/training.py
+
+##### parameter grid
+parameter grid was at /mch/config/model_training_config.yaml. And read by /mch/config/modelTrainingParameters.py
+
+#### Parallel training
+
+##### auto assign job
+auto assign job/run using warking_branch/Assign_job, need parameters:
+
+job_id: id of your job_cluster
+
+if want train specific node, change cell 4/5, cell 4 is for train nodes that have more than 50 sample, cell 5 is for train node have specific name
+
+if policy allow to assign more than 3 runs per time, change the cell 8 where len()==3
+
+##### train note book
+each job cluster using for parallel training need to use working_branch/Training_model_child
+
+it will call BatchmodelTrainer in src/mch/model/traininig.py
+
+### config files
+
+if the structure of parameter in model_training_config.yaml was changed, need to change the last few lines in modelTrainingParameters.py to fit the new structure.
 There should be set up instructions, yes.
 
 scripts to find and generate data are in /data_processing. 
@@ -39,3 +103,4 @@ Deployment instructions
 
 ##Who do I talk to?
 Ben
+

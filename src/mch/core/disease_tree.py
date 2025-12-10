@@ -10,7 +10,10 @@ import random
 from dataclasses import dataclass, field
 from typing import Optional, List
 
-from mch.db.database import Database 
+import sys
+sys.path.append(r"/Workspace/9900-f18a-cake/working_branch/src/mch")
+
+from db.database import Database 
 
 @dataclass
 class DiseaseTree:

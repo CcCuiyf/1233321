@@ -8,7 +8,7 @@ grid_search_config:
   scoring: 'accuracy'
   n_splits: 3
   n_jobs: 10
-  verbose: 2
+  verbose: 3
   error_score: 'raise'
 
 model_configs:
@@ -27,12 +27,18 @@ model_configs:
       random_state: 42
       n_jobs: -1
     parameter_grid:
-      modelRefinement__n_estimators: [100, 200, 300]
-      modelRefinement__max_depth: [null, 10, 20]
-      modelRefinement__criterion: ['gini', 'entropy']
-      modelRefinement__max_features: [null, 'sqrt', 'log2']
-      modelRefinement__min_samples_split: [2, 5, 10]
-      modelRefinement__class_weight: [null, 'balanced']
+      # modelGeneration__n_estimators: [100, 200, 300]
+      # modelGeneration__max_depth: [null, 10, 20]
+      # modelGeneration__criterion: ['gini', 'entropy']
+      # modelGeneration__max_features: [null, 'sqrt', 'log2']
+      # modelGeneration__min_samples_split: [2, 5, 10]
+      # modelGeneration__class_weight: [null, 'balanced']
+      modelGeneration__n_estimators: [100]
+      modelGeneration__max_depth: [20]
+      modelGeneration__criterion: ['gini']
+      modelGeneration__max_features: ['log2']
+      modelGeneration__min_samples_split: [2]
+      modelGeneration__class_weight: [null]
 
   #modelRefinement__kernel:
   #  - linear
